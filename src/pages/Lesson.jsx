@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // Lesson data
 const lessons = [
@@ -11,12 +12,10 @@ const lessons = [
   { id: 7, title: "Events 🎬", emoji: "🎉", color: "bg-red-400" },
   { id: 8, title: "Operators ➕", emoji: "🔢", color: "bg-teal-400" },
   { id: 9, title: "Data Types 🔠", emoji: "🔣", color: "bg-indigo-400" },
-  { id: 10, title: "Debugging 🐞", emoji: "🔍", color: "bg-gray-400" }
+  { id: 10, title: "Debugging 🐞", emoji: "🔍", color: "bg-gray-400" },
 ];
 
-
 export default function Lessons() {
-  
   const [completedLessons] = useState(
     JSON.parse(localStorage.getItem("completedLessons")) || []
   );
@@ -29,18 +28,17 @@ export default function Lessons() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {lessons.map((lesson) => (
-            <a
+            <Link
               key={lesson.id}
-              href={`/lessons/${lesson.id}`}
+              to={`/lessons/${lesson.id}`}
               className={`${lesson.color} p-6 rounded-xl shadow-lg hover:scale-105 transform transition-all duration-200 text-white relative`}
             >
-              
               {completedLessons.includes(lesson.id.toString()) && (
                 <div className="absolute top-2 right-2 text-2xl">✅</div>
               )}
               <div className="text-6xl mb-4">{lesson.emoji}</div>
               <h3 className="text-2xl font-bold">{lesson.title}</h3>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
